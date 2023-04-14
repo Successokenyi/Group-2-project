@@ -1,0 +1,50 @@
+import datetime 
+from playsound import playsound
+import tkinter as tk
+
+def set_alarm():
+    alarmHour = int(hour_input.get())
+    alarmMin = int(min_input.get())
+    alarmAm = am_input.get()
+
+    if alarmAm == "pm":
+        alarmHour +=12
+
+    while True:
+        if alarmHour==datetime.datetime.now().hour and alarmMin==datetime.datetime.now().minute:
+            status_label.config(text="Playing..")
+            playsound("ring2-mp3-6551.mp3")
+            break
+
+# Create the GUI window
+root = tk.Tk()
+root.configure(bg='red')
+
+root.title("Alarm Clock")
+
+# Create input fields and labels for hour, minute, and am/pm
+hour_label = tk.Label(root, text="Enter hour:")
+hour_label.pack()
+hour_input = tk.Entry(root)
+hour_input.pack()
+
+min_label = tk.Label(root, text="Enter minutes:")
+min_label.pack()
+min_input = tk.Entry(root)
+min_input.pack()
+
+am_label = tk.Label(root, text="am/pm:")
+am_label.pack()
+am_input = tk.Entry(root)
+am_input.pack()
+
+# Create a button to set the alarm
+set_button = tk.Button(root, text="Set Alarm", command=set_alarm)
+set_button.pack()
+
+# Create a label to display the status of the alarm
+status_label = tk.Label(root, text="")
+status_label.pack()
+
+# Start the GUI event loop
+root.mainloop()
